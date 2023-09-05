@@ -1,0 +1,48 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Solicitar al usuario la edad del ganador y la cantidad de adivinanzas acertadas
+        Console.Write("Ingrese la edad del ganador: ");
+        int edad = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Ingrese la cantidad de adivinanzas acertadas: ");
+        int adivinanzasAcertadas = Convert.ToInt32(Console.ReadLine());
+
+        // Definir los montos iniciales según la edad y la cantidad de adivinanzas acertadas
+        double montoInicial = 0.0;
+
+        if (edad >= 18) // Mayor de edad
+        {
+            if (adivinanzasAcertadas < 3)
+            {
+                montoInicial = 30.00;
+            }
+            else
+            {
+                montoInicial = 50.00;
+            }
+        }
+        else // Menor de edad
+        {
+            if (adivinanzasAcertadas < 3)
+            {
+                montoInicial = 50.00;
+            }
+            else
+            {
+                montoInicial = 80.00;
+            }
+        }
+
+        // Calcular el monto extra
+        double montoExtra = (edad * 5.00) + (adivinanzasAcertadas * 2.00);
+
+        // Calcular el monto final
+        double montoFinal = montoInicial + montoExtra;
+
+        Console.WriteLine($"El monto final que el ganador recibe como premio es: S/. {montoFinal}");
+    }
+}
