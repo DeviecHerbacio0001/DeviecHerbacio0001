@@ -1,0 +1,58 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Definir los precios por día para hoteles de tres estrellas y cinco estrellas
+        const double precioTresEstrellas = 100.00;
+        const double precioCincoEstrellas = 300.00;
+
+        // Costo adicional por desayuno por día
+        const double costoDesayuno = 7.00;
+
+        // Solicitar al usuario la cantidad de días y la categoría del hotel
+        Console.Write("Ingrese la cantidad de días de estadía: ");
+        int dias;
+
+        if (!int.TryParse(Console.ReadLine(), out dias) || dias <= 0)
+        {
+            Console.WriteLine("Por favor, ingrese una cantidad válida de días.");
+            return;
+        }
+
+        Console.Write("Ingrese la categoría del hotel (Tres estrellas o Cinco estrellas): ");
+        string categoriaHotel = Console.ReadLine().ToLower();
+
+        double costoEstadia = 0.0;
+
+        // Calcular el costo de estadía según la categoría y la cantidad de días
+        if (categoriaHotel == "tres estrellas")
+        {
+            if (dias >= 1 && dias <= 5)
+            {
+                costoEstadia = precioTresEstrellas * dias;
+            }
+            else if (dias >= 6 && dias <= 10)
+            {
+                costoEstadia = 85.00 * dias;
+            }
+        }
+        else if (categoriaHotel == "cinco estrellas")
+        {
+            if (dias >= 1 && dias <= 5)
+            {
+                costoEstadia = precioCincoEstrellas * dias;
+            }
+            else if (dias >= 6 && dias <= 10)
+            {
+                costoEstadia = 270.00 * dias;
+            }
+        }
+
+        // Calcular el costo total incluyendo el desayuno
+        double costoTotal = costoEstadia + (costoDesayuno * dias);
+
+        Console.WriteLine($"El costo total de estadía en un hotel {categoriaHotel} por {dias} días con desayuno es: S/. {costoTotal}");
+    }
+}
