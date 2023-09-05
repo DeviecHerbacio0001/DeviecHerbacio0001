@@ -1,0 +1,41 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Tipo de fruta y distancia en kilómetros
+        string tipoDeFruta = "Naranja"; // Cambia el tipo de fruta según lo necesario
+        int distanciaEnKm = 40; // Cambia la distancia según lo necesario
+
+        // Precios por caja según la tabla
+        double precioMenos30Km = 0.0;
+        double precioMas30Km = 0.0;
+
+        if (tipoDeFruta == "Naranja")
+        {
+            precioMenos30Km = 2.00;
+            precioMas30Km = 4.00;
+        }
+        else if (tipoDeFruta == "Fresa")
+        {
+            precioMenos30Km = 6.00;
+            precioMas30Km = 9.00;
+        }
+        else if (tipoDeFruta == "Mango")
+        {
+            precioMenos30Km = 3.00;
+            precioMas30Km = 5.00;
+        }
+        else
+        {
+            Console.WriteLine("Tipo de fruta no válido");
+            return;
+        }
+
+        // Calcular el costo total
+        double costoTotal = distanciaEnKm < 30 ? precioMenos30Km : precioMas30Km;
+
+        Console.WriteLine($"El costo total por transportar {tipoDeFruta} a {distanciaEnKm} km es: S/. {costoTotal:F2}");
+    }
+}
