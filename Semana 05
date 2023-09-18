@@ -1,0 +1,39 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            Console.Write("Ingresa el número 1: ");
+            int num1 = int.Parse(Console.ReadLine());
+
+            Console.Write("Ingresa el número 2: ");
+            int num2 = int.Parse(Console.ReadLine());
+
+            int resultado = MultiplicarSinOperador(num1, num2);
+            Console.WriteLine($"El producto es: {resultado}");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Por favor, ingresa números enteros válidos.");
+        }
+    }
+
+    static int MultiplicarSinOperador(int numero1, int numero2)
+    {
+        int resultado = 0;
+        bool esNegativo = (numero1 < 0 && numero2 > 0) || (numero1 > 0 && numero2 < 0);
+
+        numero1 = Math.Abs(numero1);
+        numero2 = Math.Abs(numero2);
+
+        for (int i = 0; i < numero2; i++)
+        {
+            resultado += numero1;
+        }
+
+        return esNegativo ? -resultado : resultado;
+    }
+}
