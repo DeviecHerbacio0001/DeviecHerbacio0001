@@ -1,0 +1,40 @@
+using System;
+
+class Program
+{
+    static double CalcularPotencia(double baseNumero, int exponente)
+    {
+        double resultado = 1.0;
+
+        for (int i = 0; i < Math.Abs(exponente); i++)
+        {
+            resultado *= baseNumero;
+        }
+
+        if (exponente < 0)
+        {
+            resultado = 1.0 / resultado;
+        }
+
+        return resultado;
+    }
+
+    static void Main()
+    {
+        try
+        {
+            Console.Write("Ingresa la base: ");
+            double baseNumero = double.Parse(Console.ReadLine());
+
+            Console.Write("Ingresa el exponente: ");
+            int exponente = int.Parse(Console.ReadLine());
+
+            double resultado = CalcularPotencia(baseNumero, exponente);
+            Console.WriteLine($"El resultado es: {resultado}");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Por favor, ingresa números válidos.");
+        }
+    }
+}
