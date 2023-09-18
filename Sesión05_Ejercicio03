@@ -1,0 +1,28 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Ingrese la cantidad de notas: ");
+        int n = int.Parse(Console.ReadLine());
+
+        if (n <= 0)
+        {
+            Console.WriteLine("La cantidad de notas debe ser mayor que cero.");
+            return;
+        }
+
+        double sumaNotas = 0;
+
+        for (int i = 1; i <= n; i++)
+        {
+            Console.Write($"Ingrese la nota {i}: ");
+            double nota = double.Parse(Console.ReadLine());
+            sumaNotas += nota;
+        }
+
+        double promedio = sumaNotas / n;
+        Console.WriteLine($"El promedio de las {n} notas es: {promedio}");
+    }
+}
