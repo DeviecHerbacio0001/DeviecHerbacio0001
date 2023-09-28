@@ -1,0 +1,98 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int maxAsistentes;
+        int aforoActual = 0;
+        int totalEntradas = 0;
+        int totalSalidas = 0;
+        int vecesLleno = 0;
+        int vecesVacio = 0;
+
+        Console.Write("Ingrese el número máximo de asistentes permitidos en la tiendita: ");
+        while (!int.TryParse(Console.ReadLine(), out maxAsistentes) || maxAsistentes <= 0)
+        {
+            Console.WriteLine("Ingrese un número válido mayor que cero.");
+            Console.Write("Número máximo de asistentes permitidos: ");
+        }
+
+        Console.Clear();
+        Console.WriteLine($"| Asistentes Actuales | {aforoActual}\n| Aforo | {aforoActual} (0.00%) | Máximo | {maxAsistentes}");
+
+        while (true)
+        {
+            Console.WriteLine("\nOpciones:");
+            Console.WriteLine("[i] para registrar entrada de una persona");
+            Console.WriteLine("[s] para registrar salida de una persona");
+            Console.WriteLine("[x] para salir del programa");
+            ConsoleKeyInfo opcion = Console.ReadKey();
+
+            switch (opcion.KeyChar)
+            {
+                case 'i':
+                case 'I':
+                    if (aforoActual < maxAsistentes)
+                    {
+                        aforoActual++;
+                        totalEntradas++;
+                        Console.Clear();
+                        Console.WriteLine($"| Asistentes Actuales | {aforoActual}\n| Aforo | {aforoActual} ({(double)aforoActual / maxAsistentes * 100:F2}%) | Máximo | {maxAsistentes}");
+                        Console.WriteLine("\nEntrada registrada.");
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine($"| Asistentes Actuales | {aforoActual}\n| Aforo | {aforoActual} ({(double)aforoActual / maxAsistentes * 100:F2}%) | Máximo | {maxAsistentes}");
+                        Console.WriteLine("\nLa tiendita ha alcanzado su capacidad máxima. No se permite la entrada.");
+                    }
+                    break;
+
+                case 's':
+                case 'S':
+                    if (aforoActual > 0)
+                    {
+                        aforoActual--;
+                        totalSalidas++;
+                        Console.Clear();
+                        Console.WriteLine($"| Asistentes Actuales | {aforoActual}\n| Aforo | {aforoActual} ({(double)aforoActual / maxAsistentes * 100:F2}%) | Máximo | {maxAsistentes}");
+                        Console.WriteLine("\nSalida registrada.");
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine($"| Asistentes Actuales | {aforoActual}\n| Aforo | {aforoActual} ({(double)aforoActual / maxAsistentes * 100:F2}%) | Máximo | {maxAsistentes}");
+                        Console.WriteLine("\nNo hay personas en la tiendita para registrar salida.");
+                    }
+                    break;
+
+                case 'x':
+                case 'X':
+                    Console.Clear();
+                    Console.WriteLine("Resumen final:");
+                    Console.WriteLine($"Total de personas que entraron: {totalEntradas}");
+                    Console.WriteLine($"Total de personas que salieron: {totalSalidas}");
+                    Console.WriteLine($"Veces que el local se llenó: {vecesLleno}");
+                    Console.WriteLine($"Veces que el local estuvo vacío: {vecesVacio}");
+                    Console.WriteLine("\n¡Gracias por usar el sistema de control de aforo!");
+                    return;
+
+                default:
+                    Console.Clear();
+                    Console.WriteLine($"| Asistentes Actuales | {aforoActual}\n| Aforo | {aforoActual} ({(double)aforoActual / maxAsistentes * 100:F2}%) | Máximo | {maxAsistentes}");
+                    Console.WriteLine("\nOpción no válida. Por favor, presione [i], [s] o [x].");
+                    break;
+            }
+
+            if (aforoActual == maxAsistentes)
+            {
+                vecesLleno++;
+            }
+            else if (aforoActual == 0)
+            {
+                vecesVacio++;
+            }
+        }
+    }
+}
