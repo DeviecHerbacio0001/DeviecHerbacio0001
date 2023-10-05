@@ -1,0 +1,43 @@
+// See https://aka.ms/new-console-template for more information
+using System;
+
+public class MainClass
+{
+    public static void Main()
+    {
+        while (true)
+        {
+            // Solicitamos al usuario que ingrese un número
+            Console.Write("Ingrese un número o escriba 'salir' para terminar: ");
+            string entrada = Console.ReadLine();
+
+            // Verificamos si el usuario quiere salir
+            if (entrada.ToLower() == "salir")
+            {
+                break;
+            }
+
+            // Convertimos la entrada a un número entero
+            if (int.TryParse(entrada, out int n))
+            {
+                // Iteramos para imprimir la cantidad de filas especificada
+                for (int i = 0; i < n; i++)
+                {
+                    // Imprimimos una fila de asteriscos con longitud igual al número ingresado multiplicado por 2
+                    for (int j = 0; j < n * 2; j++)
+                    {
+                        // Imprimimos un asterisco
+                        Console.Write("*");
+                    }
+
+                    // Imprimimos un salto de línea después de cada fila
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Entrada inválida. Ingrese un número válido o 'salir' para terminar.");
+            }
+        }
+    }
+}
