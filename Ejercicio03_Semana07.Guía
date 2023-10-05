@@ -1,0 +1,26 @@
+// See https://aka.ms/new-console-template for more information
+
+using System;
+
+public class MainClass
+{
+    public static void Main()
+    {
+        int year = 1900; // Comenzamos desde el año 1900
+
+        Console.WriteLine("Años bisiestos desde 1900:");
+
+        while (year <= DateTime.Now.Year) // Cambia DateTime.Now.Year al año que desees como límite
+        {
+            // Comprobamos si el año es bisiesto
+            if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+            {
+                // Imprimimos el año bisiesto
+                Console.WriteLine(year);
+            }
+
+            // Incrementamos el año
+            year++;
+        }
+    }
+}
