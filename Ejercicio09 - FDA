@@ -1,0 +1,179 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("=====================================");
+        Console.WriteLine("Tienda de Don Lucas");
+        Console.WriteLine("=====================================");
+
+        Dictionary<string, double> categorias = new Dictionary<string, double>
+        {
+            { "Limpieza", 0.0 },
+            { "Abarrotes", 0.0 },
+            { "Golosinas", 0.0 },
+            { "Electrónicos", 0.0 }
+        };
+
+        int opcion;
+        do
+        {
+            Console.WriteLine("1: Registrar Ventas");
+            Console.WriteLine("2: Registrar Devolución");
+            Console.WriteLine("3: Cerrar Caja");
+            Console.WriteLine("=====================================");
+            Console.Write("Ingrese una opción: ");
+            if (int.TryParse(Console.ReadLine(), out opcion))
+            {
+                switch (opcion)
+                {
+                    case 1:
+                        RegistrarVenta(categorias);
+                        RegistrarDevolucion(categorias); // Agregado para mostrar el menú de devolución
+                        break;
+                    case 2:
+                        RegistrarDevolucion(categorias);
+                        RegistrarVenta(categorias); // Agregado para mostrar el menú de venta
+                        break;
+                    case 3:
+                        CerrarCaja(categorias);
+                        break;
+                    default:
+                        Console.WriteLine("Opción no válida. Intente de nuevo.");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Opción no válida. Intente de nuevo.");
+            }
+        } while (opcion != 3);
+    }
+
+    static void RegistrarVenta(Dictionary<string, double> categorias)
+    {
+        Console.WriteLine("=====================================");
+        Console.WriteLine("Registro Venta de:");
+        Console.WriteLine("=====================================");
+        Console.WriteLine("1: Limpieza");
+        Console.WriteLine("2: Abarrotes");
+        Console.WriteLine("3: Golosinas");
+        Console.WriteLine("4: Electrónicos");
+        Console.WriteLine("5: <- Regresar");
+        Console.WriteLine("=====================================");
+        Console.Write("Ingrese una opción: ");
+        int opcionVenta;
+        if (int.TryParse(Console.ReadLine(), out opcionVenta))
+        {
+            if (opcionVenta >= 1 && opcionVenta <= 4)
+            {
+                string categoria = ObtenerCategoria(opcionVenta);
+                Console.Write($"Ingrese el monto de venta para {categoria}: ");
+                double montoVenta;
+                if (double.TryParse(Console.ReadLine(), out montoVenta))
+                {
+                    categorias[categoria] += montoVenta;
+                    Console.WriteLine($"Venta de {categoria} registrada con éxito.");
+                }
+                else
+                {
+                    Console.WriteLine("Monto de venta no válido. Intente de nuevo.");
+                }
+            }
+            else if (opcionVenta == 5)
+            {
+                // Regresar al menú principal
+            }
+            else
+            {
+                Console.WriteLine("Opción no válida. Intente de nuevo.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Opción no válida. Intente de nuevo.");
+        }
+    }
+
+    static void RegistrarDevolucion(Dictionary<string, double> categorias)
+    {
+        Console.WriteLine("=====================================");
+        Console.WriteLine("Registrar Devolución de:");
+        Console.WriteLine("=====================================");
+        Console.WriteLine("1: Limpieza");
+        Console.WriteLine("2: Abarrotes");
+        Console.WriteLine("3: Golosinas");
+        Console.WriteLine("4: Electrónicos");
+        Console.WriteLine("5: <- Regresar");
+        Console.WriteLine("=====================================");
+        Console.Write("Ingrese una opción: ");
+        int opcionDevolucion;
+        if (int.TryParse(Console.ReadLine(), out opcionDevolucion))
+        {
+            if (opcionDevolucion >= 1 && opcionDevolucion <= 4)
+            {
+                string categoria = ObtenerCategoria(opcionDevolucion);
+                Console.Write($"Ingrese el monto de devolución para {categoria}: ");
+                double montoDevolucion;
+                if (double.TryParse(Console.ReadLine(), out montoDevolucion))
+                {
+                    if (montoDevolucion <= categorias[categoria])
+                    {
+                        categorias[categoria] -= montoDevolucion;
+                        Console.WriteLine($"Devolución de {categoria} registrada con éxito.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("El monto de devolución excede las ventas. Intente de nuevo.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Monto de devolución no válido. Intente de nuevo.");
+                }
+            }
+            else if (opcionDevolucion == 5)
+            {
+                // Regresar al menú principal
+            }
+            else
+            {
+                Console.WriteLine("Opción no válida. Intente de nuevo.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Opción no válida. Intente de nuevo.");
+        }
+    }
+
+    static string ObtenerCategoria(int opcion)
+    {
+        switch (opcion)
+        {
+            case 1:
+                return "Limpieza";
+            case 2:
+                return "Abarrotes";
+            case 3:
+                return "Golosinas";
+            case 4:
+                return "Electrónicos";
+            default:
+                return "";
+        }
+    }
+
+    static void CerrarCaja(Dictionary<string, double> categorias)
+    {
+        Console.WriteLine("=====================================");
+        Console.WriteLine("Resumen de ventas por categoría:");
+        foreach (var categoria in categorias)
+        {
+            Console.WriteLine($"{categoria.Key}: ${categoria.Value:F2}");
+        }
+        Console.WriteLine("=====================================");
+    }
+}
