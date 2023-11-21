@@ -1,0 +1,181 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Encuesta
+{
+    public int Satisfaccion { get; set; }
+}
+
+public class Program
+{
+    static List<Encuesta> encuestas = new List<Encuesta>();
+
+    public static void Main()
+    {
+        while (true)
+        {
+            Console.WriteLine("============================");
+            Console.WriteLine("Encuestas de Calidad");
+            Console.WriteLine("============================");
+            Console.WriteLine("1: Realizar Encuesta");
+            Console.WriteLine("2: Ver datos registrados");
+            Console.WriteLine("3: Eliminar un dato");
+            Console.WriteLine("4: Ordenar datos de menor a mayor");
+            Console.WriteLine("5: Salir");
+            Console.WriteLine("============================================================");
+            Console.Write("Ingrese una opción: ");
+
+            int opcion = Convert.ToInt32(Console.ReadLine());
+
+            switch (opcion)
+            {
+                case 1:
+                    RealizarEncuesta();
+                    break;
+                case 2:
+                    VerDatos();
+                    break;
+                case 3:
+                    EliminarDato();
+                    break;
+                case 4:
+                    OrdenarDatos();
+                    break;
+                case 5:
+                    return;
+                default:
+                    Console.WriteLine("Opción no válida. Intente de nuevo.");
+                    break;
+            }
+        }
+    }
+
+    static void RealizarEncuesta()
+    {
+        Console.WriteLine("==============================");
+        Console.WriteLine("Nivel de Satisfacción");
+        Console.WriteLine("==============================");
+        Console.WriteLine("¿Qué tan satisfecho está con la atención de nuestra tienda?");
+        Console.WriteLine("1: Nada satisfecho");
+        Console.WriteLine("2: No muy satisfecho");
+        Console.WriteLine("3: Tolerable");
+        Console.WriteLine("4: Satisfecho");
+        Console.WriteLine("5: Muy satisfecho");
+        Console.WriteLine("============================================================");
+        Console.Write("Ingrese una opción: ");
+
+        int satisfaccion = Convert.ToInt32(Console.ReadLine());
+
+        encuestas.Add(new Encuesta { Satisfaccion = satisfaccion });
+
+        Console.WriteLine("==============================");
+        Console.WriteLine("¡Gracias por participar!");
+        Console.WriteLine("==============================");
+        Console.WriteLine("Presione una tecla para regresar al menú ...");
+        Console.ReadKey();
+    }
+
+    static void VerDatos()
+    {
+        Console.WriteLine("==============================");
+        Console.WriteLine("Ver datos registrados");
+        Console.WriteLine("==============================");
+        for (int i = 0; i < encuestas.Count; i++)
+        {
+            Console.Write($"[{encuestas[i].Satisfaccion}] ");
+            if ((i + 1) % 5 == 0)
+            {
+                Console.WriteLine();
+            }
+        }
+        Console.WriteLine();
+        for (int i = 1; i <= 5; i++)
+        {
+            int count = encuestas.Count(e => e.Satisfaccion == i);
+            Console.WriteLine($"{count.ToString("00")} personas: {(Satisfaccion)i}");
+        }
+        Console.WriteLine("==============================");
+        Console.WriteLine("Presione una tecla para regresar ...");
+        Console.ReadKey();
+    }
+
+    static void EliminarDato()
+    {
+        Console.WriteLine("==============================");
+        Console.WriteLine("Eliminar un dato");
+        Console.WriteLine("==============================");
+        for (int i = 0; i < encuestas.Count; i++)
+        {
+            Console.Write($"{i.ToString("000")}: [{encuestas[i].Satisfaccion}] ");
+            if ((i + 1) % 5 == 0)
+            {
+                Console.WriteLine();
+            }
+        }
+        Console.WriteLine();
+        Console.Write("Ingrese la posición a eliminar: ");
+        int numero = Convert.ToInt32(Console.ReadLine());
+
+        if (numero >= 0 && numero < encuestas.Count)
+        {
+            encuestas.RemoveAt(numero);
+        }
+        else
+        {
+            Console.WriteLine("Número de encuesta no válido. Intente de nuevo.");
+        }
+        Console.WriteLine("==============================");
+        Console.WriteLine("Presione una tecla para regresar ...");
+        Console.ReadKey();
+    }
+
+    static void OrdenarDatos()
+    {
+        Console.WriteLine("==============================");
+        Console.WriteLine("Ordenar datos");
+        Console.WriteLine("==============================");
+        for (int i = 0; i < encuestas.Count; i++)
+        {
+            Console.Write($"{i.ToString("000")}: [{encuestas[i].Satisfaccion}] ");
+            if ((i + 1) % 5 == 0)
+            {
+                Console.WriteLine();
+            }
+        }
+        Console.WriteLine();
+        Console.Write("Ingrese la posición a eliminar: ");
+        int numero = Convert.ToInt32(Console.ReadLine());
+
+        if (numero >= 0 && numero < encuestas.Count)
+        {
+            encuestas.RemoveAt(numero);
+        }
+        else
+        {
+            Console.WriteLine("Número de encuesta no válido. Intente de nuevo.");
+        }
+        Console.WriteLine("==============================");
+        for (int i = 0; i < encuestas.Count; i++)
+        {
+            Console.Write($"{i.ToString("000")}: [{encuestas[i].Satisfaccion}] ");
+            if ((i + 1) % 5 == 0)
+            {
+                Console.WriteLine();
+            }
+        }
+        Console.WriteLine();
+        Console.WriteLine("==============================");
+        Console.WriteLine("Presione una tecla para regresar ...");
+        Console.ReadKey();
+    }
+}
+
+public enum Satisfaccion
+{
+    NadaSatisfecho = 1,
+    NoMuySatisfecho = 2,
+    Tolerable = 3,
+    Satisfecho = 4,
+    MuySatisfecho = 5
+}
